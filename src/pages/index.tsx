@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import AppHeader from "../components/layout/AppHeader";
 import { Toolbar } from "@mui/material";
-import Pools from "../../public/arbi.json";
+
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 export interface Token0 {
@@ -119,8 +119,7 @@ const columns = [
   { field: "apy", headerName: "APY", width: 70, sortable: true },
 ];
 
-export default function Index(props: any) {
-  const pools = Pools;
+export default function Index({ pools }: { pools: PoolsModel }) {
   return (
     <>
       <AppHeader />
@@ -131,6 +130,7 @@ export default function Index(props: any) {
           <DataGrid
             columns={columns}
             rows={pools}
+            pageSize={16}
             getRowId={(row: PoolsModel) => row.pair.id}
           />
         </Box>
@@ -140,10 +140,13 @@ export default function Index(props: any) {
 }
 export async function getStaticProps() {
   console.log("----------------");
-
+  const pools_raw = await fetch(
+    "https://app.sushi.com/api/analytics/pairs/42161"
+  );
+  const pools = await pools_raw.json();
   console.log("----------------");
 
   return {
-    props: {},
+    props: { pools },
   };
 }

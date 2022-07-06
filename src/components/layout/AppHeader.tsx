@@ -35,7 +35,7 @@ export default function () {
       <AppBar>
         <Toolbar>
           <Typography variant="h6" component="div" textAlign={"center"}>
-            Sushi Pools
+            Sushi Pools Info
           </Typography>
         </Toolbar>
       </AppBar>
