@@ -129,6 +129,7 @@ export default function Index({ pools }: { pools: PoolsModel }) {
         <Box pt={"2rem"} sx={{ height: "calc(100vh - 120px)", width: "100%" }}>
           <DataGrid
             columns={columns}
+            // @ts-ignore
             rows={pools}
             pageSize={16}
             getRowId={(row: PoolsModel) => row.pair.id}
